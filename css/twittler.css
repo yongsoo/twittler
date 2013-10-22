@@ -1,0 +1,26 @@
+body {
+	font-size: large;
+	font-family: Courier, Lucida, Everson Mono, Consolas;;
+	background-color: #A8E1FF;
+	float: center;
+	text-align: center;
+}
+
+a {
+	font-family: Courier, Lucida, Everson Mono, Consolas;
+	font-size: 1.4em;
+	text-decoration: none;
+	color: #3B647A;
+}
+
+a:visited {
+	color: #3B647A;
+}
+
+a:hover {
+	color: #1F2E36;
+}
+
+a:active {
+	color: #4EB9F2;
+}
