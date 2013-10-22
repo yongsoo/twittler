@@ -1,9 +1,15 @@
 body {
 	font-size: large;
-	font-family: Courier, Lucida, Everson Mono, Consolas;;
+	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 	background-color: #A8E1FF;
 	float: center;
 	text-align: center;
+}
+
+h1 {
+	font-size: 4.3em;
+	color: #3B647A;
+	margin: .2em 0;
 }
 
 a {
@@ -23,4 +29,9 @@ a:hover {
 
 a:active {
 	color: #4EB9F2;
+}
+
+#tweetstream {
+	margin: 1em 25em;
+	text-align: left;
 }
