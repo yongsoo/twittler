@@ -23,8 +23,8 @@
           var indexDiff = index - 10;
           while(index >= indexDiff){
             var tweet = streams.home[index];
-            var $tweet = $('<li></li>');
-            $tweet.text("(" + tweet.created_at.toLocaleTimeString() + ") " + '@' + tweet.user + ': ' + tweet.message);
+            var $tweet = $('<li class="tweet"></li>');
+            $tweet.text("(" + tweet.created_at.toLocaleTimeString() + ") " + '@' + tweet["user"] + ': ' + tweet["message"]);
             $tweetstream.append($tweet);
             index -= 1;
           }
