@@ -11,22 +11,34 @@
   <body>
     <h1>Twittler</h1>
     <ul id="tweetstream"></ul>
+    <div id="timestamp"></div>
 
     <script>
       $(document).ready(function(){
 
         var fetchTweets = function() {
+          var currentTime = new Date();
+          var currentMinutes = currentTime.getMinutes();
+
           var $tweetstream = $('#tweetstream');
           $tweetstream.html('<li></li>');
+          var $createdAt = $('#timestamp');
+          $createdAt.html('<div></div>');
+
 
           var index = streams.home.length - 1;
-          var indexDiff = index - 10;
+          var indexDiff = index - 20;
           while(index >= indexDiff){
             var tweet = streams.home[index];
             var $tweet = $('<li class="tweet"></li>');
-            $tweet.text("(" + tweet.created_at.toLocaleTimeString() + ") " + '@' + tweet["user"] + ': ' + tweet["message"]);
-            $tweetstream.append($tweet);
+
+            var tweetMinute = Number(Math.abs(tweet.created_at.toLocaleTimeString().slice(3, 5) - currentMinutes));
+
             index -= 1;
+
+            // This needs to be the last thing that happens
+            $tweet.text("(" + tweetMinute + " min ago) " + '@' + tweet["user"] + ': ' + tweet["message"]);
+            $tweetstream.append($tweet);
           }
         };
 

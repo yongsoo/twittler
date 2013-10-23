@@ -46,13 +46,13 @@ var generateRandomTweet = function(){
   addTweet(tweet);
 };
 
-for(var i = 0; i < 10; i++){
+for(var i = 0; i < 20; i++){
   generateRandomTweet();
 }
 
 var scheduleNextTweet = function(){
   generateRandomTweet();
-  setTimeout(scheduleNextTweet, Math.random() * 10000);
+  setTimeout(scheduleNextTweet, Math.random() * 20000);
 };
 scheduleNextTweet();
 
