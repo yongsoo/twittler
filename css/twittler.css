@@ -31,6 +31,10 @@ a:active {
 	color: #4EB9F2;
 }
 
+.tweet {
+	margin: 1em 0;
+}
+
 #tweetstream {
 	margin: 1em 25em;
 	text-align: left;
