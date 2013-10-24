@@ -35,7 +35,16 @@ a:active {
 	margin: 1em 0;
 }
 
-#tweetstream {
-	margin: 1em 25em;
+.timestamp {
+	font-size: .7em;
+	color: #808080;
+}
+
+.user {
+	color: #537091;
+}
+
+#stream {
+	margin: 1em 20em;
 	text-align: left;
 }

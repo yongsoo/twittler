@@ -10,7 +10,7 @@
   </head>
   <body>
     <h1>Twittler</h1>
-    <ul id="tweetstream"></ul>
+    <div id="stream"></div>
 
     <script>
       $(document).ready(function(){
@@ -19,28 +19,32 @@
           var currentTime = new Date();
           var currentMinutes = currentTime.getMinutes();
 
-          var $tweetstream = $('#tweetstream');
-          $tweetstream.html('<li></li>');
+          var $stream = $('#stream');
+          $stream.html('');
 
           var index = streams.home.length - 1;
           var indexDiff = index - 20;
-          while(index >= indexDiff){
+
+          while(index >= indexDiff) {
             var tweet = streams.home[index];
             var $tweet = $('<li class="tweet"></li>');
-            var $tweetMinute = $('<div class="timestamp"></div>');
+            var $tweetMinute = $('<span class="timestamp"></span>');
+            var $tweetUser = $('<span class="user"></span>');
+            var $tweetMsg = $('<span class="message"></span>');
 
             var tweetMinute = Math.abs(Number(tweet.created_at.toLocaleTimeString().substr(tweet.created_at.toLocaleTimeString().indexOf(":") + 1, 2) - currentMinutes)) + " min ago";
 
             if (tweetMinute === "0 min ago") {
               tweetMinute = "now";
             }
+            $tweetMinute.text("(" + tweetMinute + ") ");
+            $tweetMsg.text(": " + tweet.message);
+            $tweetUser.text("@" + tweet.user);
 
-            $tweetMinute.text("(" + tweetMinute + ")");
+            $stream.append($tweetMinute, $tweetUser, $tweetMsg, '<br><br>');
 
             index -= 1;
 
-            $tweet.text("(" + tweetMinute + ") " + '@' + tweet["user"] + ': ' + tweet["message"]);
-            $tweetstream.append($tweet);
           }
         };
 
