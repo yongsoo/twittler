@@ -10,6 +10,11 @@
   </head>
   <body>
     <h1>Twittler</h1>
+    <div id="inputContainer">
+      <input id="visitor" placeholder="Enter your username" type="text"/>
+      <input id="message" placeholder="Compose a tweet" type="text" />
+      <button id="tweetButton">Tweet</button>
+    </div>
     <div id="nav">
       <div id="home">Home</div>
       <ul>Following</ul>
@@ -25,6 +30,7 @@
 
         var homeStatus = true;
         var user = "douglascalhoun";
+        var visitor;
 
         function fetchTweets() {
           var currentTime = new Date();
@@ -109,6 +115,17 @@
         $("#home").on("click", function() {
           homeStatus = true;
           refresh(homeStatus);
+        })
+
+        $("#tweetButton").on("click", function() {
+          if ($("#visitor").val() === "") {
+            alert("Please input a username!");
+          } else if ($("#message").val() === "") {
+            alert("Please compose a thoughtful tweet!");
+          } else {
+            writeTweet($("#message").val());
+            $("#message").val("");
+          }
         })
       });
     </script>
