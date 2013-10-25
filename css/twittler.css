@@ -2,7 +2,6 @@ body {
 	font-size: large;
 	font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 	background-color: #A8E1FF;
-	float: center;
 	text-align: center;
 }
 
@@ -44,7 +43,30 @@ a:active {
 	color: #537091;
 }
 
+.following {
+	list-style: none;
+	margin: .4em;
+	color: #537091;
+	font-size: .9em;
+	cursor: pointer;
+}
+
 #stream {
-	margin: 1em 20em;
+	width: 900px;
 	text-align: left;
+	float: left;
+}
+
+#nav {
+	text-align: left;
+	float: left;
+	width: 100px;
+	height: 780px;
+	margin: 0 3em;
+}
+
+#home {
+	text-align: left;
+	margin: 1em 0;
+	cursor: pointer;
 }

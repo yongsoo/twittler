@@ -10,12 +10,23 @@
   </head>
   <body>
     <h1>Twittler</h1>
+    <div id="nav">
+      <div id="home">Home</div>
+      <ul>Following</ul>
+      <li class="following" id="douglascalhoun">douglascalhoun</li>
+      <li class="following" id="shawndrost">shawndrost</li>
+      <li class="following" id="mracus">mracus</li>
+      <li class="following" id="sharksforcheap">sharksforcheap</li>
+    </div>
     <div id="stream"></div>
 
     <script>
-      $(document).ready(function(){
+      $(document).ready(function() {
 
-        var fetchTweets = function() {
+        var homeStatus = true;
+        var user = "douglascalhoun";
+
+        function fetchTweets() {
           var currentTime = new Date();
           var currentMinutes = currentTime.getMinutes();
 
@@ -46,15 +57,59 @@
             index -= 1;
 
           }
-        };
+        }
 
-        var refresh = function() {
-          fetchTweets();
-          setTimeout(refresh, 500);
-        };
+        function filter(username) {
+          var currentTime = new Date();
+          var currentMinutes = currentTime.getMinutes();
 
-        refresh();
+          var $stream = $('#stream');
+          $stream.html('');
 
+          var index = streams.users[username].length - 1;
+
+          while(index >= 0) {
+            var tweet = streams.users[username][index];
+            var $tweet = $('<li class="tweet"></li>');
+            var $tweetMinute = $('<span class="timestamp"></span>');
+            var $tweetUser = $('<span class="user"></span>');
+            var $tweetMsg = $('<span class="message"></span>');
+
+            var tweetMinute = Math.abs(Number(tweet.created_at.toLocaleTimeString().substr(tweet.created_at.toLocaleTimeString().indexOf(":") + 1, 2) - currentMinutes)) + " min ago";
+
+            if (tweetMinute === "0 min ago") {
+              tweetMinute = "now";
+            }
+            $tweetMinute.text("(" + tweetMinute + ") ");
+            $tweetMsg.text(": " + tweet.message);
+            $tweetUser.text("@" + tweet.user);
+
+            $stream.append($tweetMinute, $tweetUser, $tweetMsg, '<br><br>');
+
+            index -= 1;
+
+          }
+        }
+
+        setInterval(function() {
+          if (homeStatus) {
+            fetchTweets();
+          } else {
+            filter(user);
+          }
+        }, 1000);
+
+        $(".following").on("click", function() {
+          homeStatus = false;
+          user = $(this).attr("id");
+          filter(user);
+          refresh(homeStatus);
+        });
+
+        $("#home").on("click", function() {
+          homeStatus = true;
+          refresh(homeStatus);
+        })
       });
     </script>
   </body>
