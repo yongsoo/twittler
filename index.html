@@ -17,6 +17,7 @@
     </div>
     <div id="nav">
       <div id="home">Home</div>
+      <div id="me">My Tweets</div>
       <ul>Following</ul>
       <li class="following" id="douglascalhoun">douglascalhoun</li>
       <li class="following" id="shawndrost">shawndrost</li>
@@ -60,6 +61,7 @@
             if (tweetMinute === "0 min ago") {
               tweetMinute = "now";
             }
+
             $tweetMinute.text("(" + tweetMinute + ") ");
             $tweetMsg.text(": " + tweet.message);
             $tweetUser.text("@" + tweet.user);
@@ -98,6 +100,7 @@
             if (tweetMinute === "0 min ago") {
               tweetMinute = "now";
             }
+
             $tweetMinute.text("(" + tweetMinute + ") ");
             $tweetMsg.text(": " + tweet.message);
             $tweetUser.text("@" + tweet.user);
@@ -117,15 +120,21 @@
           }
         }, 1000);
 
+        $("#home").on("click", function() {
+          homeStatus = true;
+        });
+
+        $("#me").on("click", function() {
+          homeStatus = false;
+          user = $("#visitor").val();
+          filter(user);
+        });
+
         $(".following").on("click", function() {
           homeStatus = false;
           user = $(this).attr("id");
           filter(user);
         });
-
-        $("#home").on("click", function() {
-          homeStatus = true;
-        })
 
         $("#tweetButton").on("click", function() {
           if ($("#visitor").val() === "") {
@@ -133,6 +142,9 @@
           } else if ($("#message").val() === "") {
             alert("Please compose a thoughtful tweet!");
           } else {
+            if (streams.users[$("#visitor").val()] === undefined) {
+              streams.users[$("#visitor").val()] = []; 
+            }
             writeTweet($("#message").val());
             $("#message").val("");
           }

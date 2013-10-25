@@ -67,7 +67,6 @@ var writeTweet = function(message){
   tweet.user = $("#visitor").val();
   tweet.message = message;
   tweet.created_at = new Date();
-  streams.users[$("#visitor").val()] = [];
 
   addTweet(tweet);
 };
