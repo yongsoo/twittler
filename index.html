@@ -29,7 +29,7 @@
       $(document).ready(function() {
 
         var homeStatus = true;
-        var user = "douglascalhoun";
+        var user = "";
         var visitor;
 
         function fetchTweets() {
@@ -49,7 +49,13 @@
             var $tweetUser = $('<span class="user"></span>');
             var $tweetMsg = $('<span class="message"></span>');
 
-            var tweetMinute = Math.abs(Number(tweet.created_at.toLocaleTimeString().substr(tweet.created_at.toLocaleTimeString().indexOf(":") + 1, 2) - currentMinutes)) + " min ago";
+            var tweetCreatedTime = Number(tweet.created_at.toLocaleTimeString().substr(tweet.created_at.toLocaleTimeString().indexOf(":") + 1, 2));
+
+            if (currentMinutes < tweetCreatedTime) {
+              currentMinutes += 60;
+            }
+
+            var tweetMinute = (currentMinutes - tweetCreatedTime) + " min ago";
 
             if (tweetMinute === "0 min ago") {
               tweetMinute = "now";
@@ -81,7 +87,13 @@
             var $tweetUser = $('<span class="user"></span>');
             var $tweetMsg = $('<span class="message"></span>');
 
-            var tweetMinute = Math.abs(Number(tweet.created_at.toLocaleTimeString().substr(tweet.created_at.toLocaleTimeString().indexOf(":") + 1, 2) - currentMinutes)) + " min ago";
+            var tweetCreatedTime = Number(tweet.created_at.toLocaleTimeString().substr(tweet.created_at.toLocaleTimeString().indexOf(":") + 1, 2));
+
+            if (currentMinutes < tweetCreatedTime) {
+              currentMinutes += 60;
+            }
+
+            var tweetMinute = (currentMinutes - tweetCreatedTime) + " min ago";
 
             if (tweetMinute === "0 min ago") {
               tweetMinute = "now";
@@ -109,12 +121,10 @@
           homeStatus = false;
           user = $(this).attr("id");
           filter(user);
-          refresh(homeStatus);
         });
 
         $("#home").on("click", function() {
           homeStatus = true;
-          refresh(homeStatus);
         })
 
         $("#tweetButton").on("click", function() {
